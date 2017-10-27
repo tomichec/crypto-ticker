@@ -1,0 +1,20 @@
+<% include partials/header %>
+
+<h1>CryptoTicker</h1>
+
+<h2>Shows the value of your crypto assets</h2>
+
+<ul>
+<% curList.forEach(function (currency,index){ %>
+   <li>
+	<%= currency %>
+    </li>
+<% }); %>
+</ul>
+
+<form action="addCrypto" method="POST">
+      <input type="text" placeholder="Cryptocurrency ID" name="newCrypto">
+      <button>Add</button>
+</form>
+
+<% include partials/footer %>
