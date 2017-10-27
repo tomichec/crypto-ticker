@@ -1,0 +1,13 @@
+<h1>Value of Crypto-Currencies</h1>
+
+<p> total number of currencies: <%= data.length %></p>
+
+
+<ul>
+<% data.forEach(function (cur,index){ %>
+   <li>
+	<%= cur["name"] + " " + cur["price_usd"]%>
+    </li>
+<% }); %>
+</ul>
+
