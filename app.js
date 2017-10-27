@@ -12,17 +12,18 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 app.set("view engine", "ejs");
 
+app.use("/static/",express.static('public'));
 
-var currencies = ["bitcoin", "litecoin", "monero"];
+var curs = ["bitcoin", "litecoin", "monero"];
 
 app.get('/', function (req, res) {
     // res.send('Hi there, welcome to crypto ticker!');
-    res.render("home", {curList: currencies});    
+    res.render("home", {curList: curs});    
 });
 
 app.post('/addCrypto', function (req, res) {
     var newCrypto = req.body.newCrypto;
-    currencies.push(newCrypto);
+    curs.push(newCrypto);
     console.log('New cryptocurrency was added.');
     res.redirect('/');
 });
@@ -31,7 +32,15 @@ app.get("/results", function (req, res) {
     request("https://api.coinmarketcap.com/v1/ticker/",function (error, response, body){
 	if (!error && response.statusCode == 200 ){
 	    var data = JSON.parse(body);
-	    res.render("results", {data: data});
+	    var myData = [];
+	    data.forEach(function(item, index){
+		for (var i=0; i < curs.length; i++){
+		    if (item['id'] == curs[i]){
+			myData.push(item);
+		    }
+		}
+	    });
+	    res.render("results", {data: myData});
 	}
     });
 });

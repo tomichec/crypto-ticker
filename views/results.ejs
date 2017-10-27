@@ -2,15 +2,24 @@
 
 <h1>Value of Crypto-Currencies</h1>
 
-<p> total number of currencies: <%= data.length %></p>
+<p> total number of currencies: <span id="N"><%= data.length %></span></p>
+
 
 
 <ul>
 <% data.forEach(function (cur,index){ %>
    <li>
-	<%= cur["name"] + " " + cur["price_usd"]%>
+	<%= cur["name"] + " $" %><span id="price-<%=  index %>"><%= cur["price_usd"] %></span>
+	<br>
+	<input type="text" id="in-<%= index %>" value="0">
     </li>
 <% }); %>
 </ul>
+
+<button onclick="calc()">Calculate</button>
+
+<p>The value of all your assets is: $<span id="total">0</span></p>
+
+<script type="text/javascript" src="/static/calcTotal.js"></script>
 
 <% include partials/footer %>
