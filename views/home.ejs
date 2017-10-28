@@ -1,20 +1,21 @@
 <% include partials/header %>
 
-<h1>CryptoTicker</h1>
-
-<h2>Shows the value of your crypto assets</h2>
-
-<ul>
-<% curList.forEach(function (currency,index){ %>
-   <li>
-	<%= currency %>
-    </li>
-<% }); %>
+<ul class="list-unstyled">
+    <% curList.forEach(function (currency,index){ %>
+	<li>
+	    <%= currency %>
+	</li>
+    <% }); %>
 </ul>
 
 <form action="addCrypto" method="POST">
-      <input type="text" placeholder="Cryptocurrency ID" name="newCrypto">
-      <button>Add</button>
+    <div class="input-group">
+	<input type="text" placeholder="Cryptocurrency ID" name="newCrypto" class="form-control">
+    </div>
+
+    <div class="input-group">
+	<button class="btn btn-primary btn-block">Add</button>
+    </div>
 </form>
 
 <% include partials/footer %>
