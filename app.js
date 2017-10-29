@@ -42,6 +42,13 @@ app.get("/", function (req, res) {
     });
 });
 
+app.get("/curr.js", function (req, res) {
+    request("https://api.coinmarketcap.com/v1/ticker/",function (error, response, body){
+	if (!error && response.statusCode == 200 ){
+	    res.render("curr", {data: body});
+	}
+    });
+});
 
 app.get('/*', function (req, res) {
     res.send('Sorry, page not found...');
