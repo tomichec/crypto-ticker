@@ -1,7 +1,4 @@
-var ids = []
-currAPI.forEach(function(item, index){
-    ids.push(item['id']);
-});
+const request = require('request');
 
 $(".fa-plus").click(function(){
     $(".in-new").fadeToggle();
@@ -56,4 +53,15 @@ function init(){
     calculate();
 }
 
-init();
+currAPI = [];
+ids = [];
+
+request("https://api.coinmarketcap.com/v1/ticker/",function (error, response, body){
+    if (!error && response.statusCode == 200 ){
+	currAPI = JSON.parse(body);
+	currAPI.forEach(function(item, index){
+	    ids.push(item['id']);
+	});
+	init();
+    }
+});
